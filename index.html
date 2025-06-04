@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio | John Borel </title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo"><i class="fas fa-bolt"></i>John Borel</a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="particle-canvas"></canvas>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hi, I'm <span>John Borel</span><br>Web Developer & Designer</h1>
+                <p>I create stunning, responsive websites with modern technologies and innovative design solutions.</p>
+                <a href="#services" class="btn">Explore Services <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <p>Get to know more about my background, skills, and what I can bring to your project</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Creative Developer with Passion for Innovation</h3>
+                    <p>I'm a professional web developer with over 5 years of experience creating digital experiences. My expertise includes front-end development, UI/UX design, and responsive web solutions.</p>
+                    <p>I specialize in transforming complex ideas into elegant, user-friendly interfaces that deliver exceptional experiences across all devices.</p>
+                    <div class="skills">
+                        <span class="skill">HTML5/CSS3</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">React.js</span>
+                        <span class="skill">UI/UX Design</span>
+                        <span class="skill">Responsive Design</span>
+                        <span class="skill">Node.js</span>
+                        <span class="skill">WordPress</span>
+                        <span class="skill">SEO</span>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="profile-card">
+                        <div class="profile-img">
+                            <img src="profile.png" alt="John Borel">
+                        </div>
+                        <h3>John Borel</h3>
+                        <p>Web Developer</p>
+                        <div class="social-links" style="justify-content: center; margin-top: 20px;">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Services</h2>
+                <p>Professional solutions to elevate your digital presence and business growth</p>
+            </div>
+            
+            <div class="services-slider">
+                <div class="services-container" id="servicesContainer">
+                    <!-- Service 1 -->
+                    <div class="service-card">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 class="service-title">Web Development</h3>
+                            <p class="service-description">Custom website development with modern technologies including HTML5, CSS3, JavaScript, React, and Node.js. I create responsive, high-performance websites tailored to your business needs.</p>
+                            <div class="service-features">
+                                <div class="feature"><i class="fas fa-check-circle"></i> Responsive Design</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> CMS Integration</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> E-commerce Solutions</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> API Integration</div>
+                            </div>
+                            <a href="#contact" class="btn">Get Started</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="service-card">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h3 class="service-title">UI/UX Design</h3>
+                            <p class="service-description">User-centered design solutions that enhance engagement and conversion. I create intuitive interfaces with a focus on usability, aesthetics, and seamless user journeys.</p>
+                            <div class="service-features">
+                                <div class="feature"><i class="fas fa-check-circle"></i> Wireframing & Prototyping</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> User Research</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> Interaction Design</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> Usability Testing</div>
+                            </div>
+                            <a href="#contact" class="btn">Get Started</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="service-card">
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="service-title">Mobile Development</h3>
+                            <p class="service-description">Cross-platform mobile applications built with React Native that deliver native-like performance. I create apps that work seamlessly on both iOS and Android devices.</p>
+                            <div class="service-features">
+                                <div class="feature"><i class="fas fa-check-circle"></i> iOS & Android Apps</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> Offline Capabilities</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> API Integration</div>
+                                <div class="feature"><i class="fas fa-check-circle"></i> App Store Deployment</div>
+                            </div>
+                            <a href="#contact" class="btn">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-nav" id="sliderNav">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+                
+                <div class="slider-btn prev-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="slider-btn next-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Project Showcase</h2>
+                <p>See the transformation in my recent projects with before/after comparisons</p>
+            </div>
+            
+            <div class="project-comparison">
+                <div class="comparison-container">
+                    <div class="before">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Before redesign">
+                        <div class="comparison-label before-label">Before Redesign</div>
+                    </div>
+                    <div class="after">
+                        <img src="https://images.unsplash.com/photo-1463171379579-3fdfb86d6285?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="After redesign">
+                        <div class="comparison-label after-label">After Redesign</div>
+                    </div>
+                    <div class="slider" id="comparisonSlider"></div>
+                </div>
+                
+                <div class="project-details">
+                    <h3>E-commerce Platform Redesign</h3>
+                    <p>Complete overhaul of user interface and experience resulting in 45% increase in conversion rate and 30% faster load times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Have a project in mind? Let's work together to bring your vision to life</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <p>Santa Cruz, Trinidad & Tobago</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>johnborel06@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>+1 (868) 707-6908</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="What is this regarding?">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" placeholder="Tell me about your project"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>John Borel</h3>
+                    <p>A passionate web developer and designer dedicated to creating beautiful, functional websites that help businesses succeed in the digital world.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Web Development</a></li>
+                        <li><a href="#services">UI/UX Design</a></li>
+                        <li><a href="#services">Mobile Development</a></li>
+                        <li><a href="#services">SEO Optimization</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 John Borel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==============================================
+        // ADVANCED PARTICLE ANIMATION FOR HERO SECTION
+        // ==============================================
+        class ParticleAnimation {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.mouse = { x: null, y: null, radius: 100 };
+                this.particleCount = 100;
+                
+                // Initialize animation
+                this.initCanvas();
+                this.createParticles();
+                this.animate();
+                
+                // Event listeners
+                window.addEventListener('resize', () => this.initCanvas());
+                this.canvas.addEventListener('mousemove', (e) => {
+                    const rect = this.canvas.getBoundingClientRect();
+                    this.mouse.x = e.clientX - rect.left;
+                    this.mouse.y = e.clientY - rect.top;
+                });
+                this.canvas.addEventListener('mouseout', () => {
+                    this.mouse.x = null;
+                    this.mouse.y = null;
+                });
+            }
+            
+            initCanvas() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+            
+            createParticles() {
+                for (let i = 0; i < this.particleCount; i++) {
+                    const size = Math.random() * 5 + 1;
+                    const x = Math.random() * (this.canvas.width - size * 2) + size;
+                    const y = Math.random() * (this.canvas.height - size * 2) + size;
+                    const directionX = (Math.random() - 0.5) * 2;
+                    const directionY = (Math.random() - 0.5) * 2;
+                    
+                    // Create gradient colors
+                    const color1 = `rgba(0, 102, 255, ${Math.random() * 0.6 + 0.4})`;
+                    const color2 = `rgba(0, 204, 255, ${Math.random() * 0.6 + 0.4})`;
+                    
+                    this.particles.push({
+                        x, y, size,
+                        directionX, directionY,
+                        color1, color2
+                    });
+                }
+            }
+            
+            drawParticle(particle) {
+                // Create gradient
+                const gradient = this.ctx.createRadialGradient(
+                    particle.x, particle.y, 0,
+                    particle.x, particle.y, particle.size
+                );
+                gradient.addColorStop(0, particle.color1);
+                gradient.addColorStop(1, particle.color2);
+                
+                this.ctx.beginPath();
+                this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                this.ctx.fillStyle = gradient;
+                this.ctx.fill();
+            }
+            
+            connectParticles() {
+                for (let a = 0; a < this.particles.length; a++) {
+                    for (let b = a; b < this.particles.length; b++) {
+                        const dx = this.particles[a].x - this.particles[b].x;
+                        const dy = this.particles[a].y - this.particles[b].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 150) {
+                            const opacity = 1 - distance / 150;
+                            this.ctx.strokeStyle = `rgba(0, 102, 255, ${opacity * 0.2})`;
+                            this.ctx.lineWidth = 1;
+                            this.ctx.beginPath();
+                            this.ctx.moveTo(this.particles[a].x, this.particles[a].y);
+                            this.ctx.lineTo(this.particles[b].x, this.particles[b].y);
+                            this.ctx.stroke();
+                        }
+                    }
+                }
+            }
+            
+            updateParticles() {
+                for (let i = 0; i < this.particles.length; i++) {
+                    const p = this.particles[i];
+                    
+                    // Move particles
+                    p.x += p.directionX;
+                    p.y += p.directionY;
+                    
+                    // Bounce off walls
+                    if (p.x <= p.size || p.x >= this.canvas.width - p.size) {
+                        p.directionX = -p.directionX;
+                    }
+                    if (p.y <= p.size || p.y >= this.canvas.height - p.size) {
+                        p.directionY = -p.directionY;
+                    }
+                    
+                    // Mouse interaction
+                    if (this.mouse.x && this.mouse.y) {
+                        const dx = p.x - this.mouse.x;
+                        const dy = p.y - this.mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < this.mouse.radius) {
+                            // Repel particles from mouse
+                            const force = (this.mouse.radius - distance) / this.mouse.radius;
+                            const angle = Math.atan2(dy, dx);
+                            const moveX = Math.cos(angle) * force * 5;
+                            const moveY = Math.sin(angle) * force * 5;
+                            
+                            p.x += moveX;
+                            p.y += moveY;
+                        }
+                    }
+                }
+            }
+            
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.updateParticles();
+                
+                for (const particle of this.particles) {
+                    this.drawParticle(particle);
+                }
+                
+                this.connectParticles();
+            }
+        }
+
+        // ==============================================
+        // SERVICES SLIDESHOW FUNCTIONALITY
+        // ==============================================
+        class ServicesSlider {
+            constructor() {
+                this.container = document.getElementById('servicesContainer');
+                this.slides = document.querySelectorAll('.service-card');
+                this.dots = document.querySelectorAll('.slider-dot');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.currentSlide = 0;
+                this.slideCount = this.slides.length;
+                this.autoSlideInterval = null;
+                
+                // Initialize slider
+                this.init();
+            }
+            
+            init() {
+                // Set initial slide
+                this.showSlide(this.currentSlide);
+                
+                // Event listeners
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                
+                // Dot navigation
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.showSlide(index));
+                });
+                
+                // Auto slide
+                this.startAutoSlide();
+                
+                // Pause auto slide on hover
+                this.container.addEventListener('mouseenter', () => this.stopAutoSlide());
+                this.container.addEventListener('mouseleave', () => this.startAutoSlide());
+            }
+            
+            showSlide(index) {
+                // Update current slide
+                this.currentSlide = index;
+                
+                // Update container position
+                this.container.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+                
+                // Update active dot
+                this.dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === this.currentSlide);
+                });
+            }
+            
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.slideCount;
+                this.showSlide(this.currentSlide);
+            }
+            
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.slideCount) % this.slideCount;
+                this.showSlide(this.currentSlide);
+            }
+            
+            startAutoSlide() {
+                this.autoSlideInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 5000);
+            }
+            
+            stopAutoSlide() {
+                clearInterval(this.autoSlideInterval);
+            }
+        }
+
+        // ==============================================
+        // REST OF THE SCRIPT FOR PORTFOLIO FUNCTIONALITY
+        // ==============================================
+        
+        // Initialize particle animation
+        const particleAnimation = new ParticleAnimation('particle-canvas');
+        
+        // Initialize services slider
+        const servicesSlider = new ServicesSlider();
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.classList.remove('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Before/After Comparison Slider
+        const slider = document.getElementById('comparisonSlider');
+        const beforeContainer = document.querySelector('.before');
+        
+        function updateSliderPosition(e) {
+            const containerRect = slider.parentElement.getBoundingClientRect();
+            let xPosition = e.clientX - containerRect.left;
+            
+            // Constrain slider within container
+            xPosition = Math.max(0, Math.min(xPosition, containerRect.width));
+            
+            // Update slider position and before container width
+            const percent = (xPosition / containerRect.width) * 100;
+            slider.style.left = percent + '%';
+            beforeContainer.style.width = percent + '%';
+        }
+        
+        slider.addEventListener('mousedown', function() {
+            document.addEventListener('mousemove', updateSliderPosition);
+            document.addEventListener('mouseup', function() {
+                document.removeEventListener('mousemove', updateSliderPosition);
+            });
+        });
+        
+        // Also make slider draggable via touch events
+        slider.addEventListener('touchstart', function() {
+            document.addEventListener('touchmove', function(e) {
+                updateSliderPosition(e.touches[0]);
+            });
+            document.addEventListener('touchend', function() {
+                document.removeEventListener('touchmove', updateSliderPosition);
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // Simple validation
+            if (name && email) {
+                alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you soon at ${email}.`);
+                contactForm.reset();
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.animation = 'none';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
