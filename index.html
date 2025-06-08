@@ -789,39 +789,238 @@
             });
         });
 
-        // Before/After Comparison Slider
-        const slider = document.getElementById('comparisonSlider');
-        const beforeContainer = document.querySelector('.before');
+        // Before/After Comparison Slider (Original - to be removed or adapted if not used on main page)
+        // const slider = document.getElementById('comparisonSlider');
+        // const beforeContainer = document.querySelector('.project-comparison .before'); // Make sure selector is specific if this is kept
+
+        // function updateSliderPosition(e, sliderElement, beforeContainerElement) {
+        //     if (!sliderElement || !beforeContainerElement) return;
+        //     const containerRect = sliderElement.parentElement.getBoundingClientRect();
+        //     let xPosition = e.clientX - containerRect.left;
+
+        //     xPosition = Math.max(0, Math.min(xPosition, containerRect.width));
+
+        //     const percent = (xPosition / containerRect.width) * 100;
+        //     sliderElement.style.left = percent + '%';
+        //     beforeContainerElement.style.width = percent + '%';
+        // }
+
+        // if (slider && beforeContainer) { // Check if original slider exists
+        //     slider.addEventListener('mousedown', function() {
+        //         const moveHandler = (event) => updateSliderPosition(event, slider, beforeContainer);
+        //         document.addEventListener('mousemove', moveHandler);
+        //         document.addEventListener('mouseup', function() {
+        //             document.removeEventListener('mousemove', moveHandler);
+        //         }, { once: true });
+        //     });
+
+        //     slider.addEventListener('touchstart', function() {
+        //         const moveHandler = (event) => updateSliderPosition(event.touches[0], slider, beforeContainer);
+        //         document.addEventListener('touchmove', moveHandler);
+        //         document.addEventListener('touchend', function() {
+        //             document.removeEventListener('touchmove', moveHandler);
+        //         }, { once: true });
+        //     });
+        // }
+
+
+        // ==============================================
+        // PROJECT MODAL FUNCTIONALITY
+        // ==============================================
+        const projectDataStore = {
+            "proj1": {
+                title: "Project Alpha - Advanced Web Application",
+                description: "Project Alpha is a cutting-edge web application designed to streamline complex data analysis. It features a highly interactive user interface and robust backend processing, built with modern JavaScript technologies.",
+                imageUrl: "https://via.placeholder.com/800x600.png?text=Project+Alpha+Large",
+                tech: ["React", "Node.js", "Express", "MongoDB", "GraphQL"],
+                links: { live: "#", code: "#" }
+            },
+            "proj2-before-after": {
+                title: "E-commerce Platform Redesign (Before/After)",
+                description: "This project involved a complete overhaul of an existing e-commerce platform's user interface and experience. The primary goal was to increase conversion rates and improve page load times, which was achieved through modern design principles and optimized frontend architecture. The Before/After slider showcases the visual transformation.",
+                useBeforeAfterSlider: true,
+                tech: ["UI/UX Design", "HTML5", "CSS3", "JavaScript", "Performance Optimization"],
+                links: { live: "#" }
+            },
+            "proj3": {
+                title: "Mobile App Concept - 'Connect'",
+                description: "A conceptual design and prototype for 'Connect', a social networking application focused on fostering local community engagement. Designed with a mobile-first approach using Figma, emphasizing intuitive navigation and a clean user interface.",
+                imageUrl: "https://via.placeholder.com/800x600.png?text=Connect+App+Mockup",
+                tech: ["Figma", "Prototyping", "Mobile UI/UX", "User Research"],
+                links: { behance: "#" }
+            },
+            "proj4": {
+                title: "Interactive Data Dashboard",
+                description: "Developed a dynamic data dashboard for visualizing complex datasets. Features include real-time data updates, customizable chart widgets, and an intuitive interface for exploring data patterns and insights.",
+                imageUrl: "https://via.placeholder.com/800x600.png?text=Data+Dashboard+View",
+                tech: ["Python (Flask)", "JavaScript (D3.js)", "WebSockets", "PostgreSQL"],
+                links: { live: "#", code: "#" }
+            }
+        };
+
+        const projectModal = document.getElementById('projectModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalProjectTitle = document.getElementById('modalProjectTitle');
+        const modalProjectImages = document.getElementById('modalProjectImages');
+        const modalProjectDescription = document.getElementById('modalProjectDescription');
+        const modalProjectTech = document.getElementById('modalProjectTech');
+        const modalProjectLinks = document.getElementById('modalProjectLinks');
         
-        function updateSliderPosition(e) {
-            const containerRect = slider.parentElement.getBoundingClientRect();
-            let xPosition = e.clientX - containerRect.left;
+        // const comparisonContainerModal = modalProjectImages.querySelector('.comparison-container-modal'); // Will be queried inside populate
+        // const regularImageContainer = document.createElement('div');
+        // regularImageContainer.className = 'modal-regular-image';
+
+        function updateSliderPositionModal(e, sliderElement, beforeContainerElement) {
+            if (!sliderElement || !beforeContainerElement) return;
+
+            const containerRect = sliderElement.parentElement.getBoundingClientRect();
+            let xPosition;
+            if (e.touches && e.touches.length > 0) {
+                xPosition = e.touches[0].clientX - containerRect.left;
+            } else {
+                xPosition = e.clientX - containerRect.left;
+            }
             
-            // Constrain slider within container
             xPosition = Math.max(0, Math.min(xPosition, containerRect.width));
             
-            // Update slider position and before container width
             const percent = (xPosition / containerRect.width) * 100;
-            slider.style.left = percent + '%';
-            beforeContainer.style.width = percent + '%';
+            sliderElement.style.left = percent + '%';
+            beforeContainerElement.style.width = percent + '%';
+        }
+
+        // let modalSliderInitialized = false; // Flag might be useful if we had complex re-init logic for multiple B/A sliders
+
+        function initModalComparisonSlider() {
+            const sliderModalEl = document.getElementById('comparisonSliderModal');
+            const beforeContainerModalEl = projectModal.querySelector('.comparison-container-modal .before');
+
+            if (sliderModalEl && beforeContainerModalEl) {
+
+                const moveHandler = (event) => updateSliderPositionModal(event, sliderModalEl, beforeContainerModalEl);
+
+                // Mouse events
+                const mouseDownHandler = () => {
+                    document.addEventListener('mousemove', moveHandler);
+                    document.addEventListener('mouseup', mouseUpHandler, { once: true });
+                };
+                const mouseUpHandler = () => {
+                    document.removeEventListener('mousemove', moveHandler);
+                };
+                sliderModalEl.addEventListener('mousedown', mouseDownHandler);
+
+                // Touch events
+                const touchStartHandler = (event) => {
+                    // event.preventDefault(); // Consider if causing scroll issues on touch devices
+                    document.addEventListener('touchmove', moveHandler);
+                    document.addEventListener('touchend', touchEndHandler, { once: true });
+                };
+                const touchEndHandler = () => {
+                    document.removeEventListener('touchmove', moveHandler);
+                };
+                sliderModalEl.addEventListener('touchstart', touchStartHandler);
+
+                // modalSliderInitialized = true;
+            } else {
+                console.error("Modal comparison slider elements not found for initialization.");
+            }
+        }
+
+        function populateProjectModal(projectId) {
+            const data = projectDataStore[projectId];
+            if (!data) {
+                console.error("Project data not found for ID:", projectId);
+                return;
+            }
+
+            modalProjectTitle.textContent = data.title;
+            modalProjectDescription.textContent = data.description;
+
+            modalProjectImages.innerHTML = '';
+            modalProjectTech.innerHTML = '';
+            modalProjectLinks.innerHTML = '';
+
+            if (data.useBeforeAfterSlider) {
+                const baSliderHTML = `
+                    <div class="comparison-container-modal">
+                        <div class="before">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Before redesign">
+                            <div class="comparison-label before-label">Before Redesign</div>
+                        </div>
+                        <div class="after">
+                            <img src="https://images.unsplash.com/photo-1463171379579-3fdfb86d6285?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="After redesign">
+                            <div class="comparison-label after-label">After Redesign</div>
+                        </div>
+                        <div class="slider" id="comparisonSliderModal"></div>
+                    </div>`;
+                modalProjectImages.innerHTML = baSliderHTML;
+                // Defer slider initialization
+                requestAnimationFrame(() => {
+                   requestAnimationFrame(initModalComparisonSlider);
+                });
+            } else if (data.imageUrl) {
+                const img = document.createElement('img');
+                img.src = data.imageUrl;
+                img.alt = data.title + " image";
+                img.style.width = "100%";
+                img.style.borderRadius = "8px";
+                modalProjectImages.appendChild(img);
+            }
+
+            data.tech.forEach(techName => {
+                const techSpan = document.createElement('span');
+                techSpan.className = 'skill';
+                techSpan.textContent = techName;
+                modalProjectTech.appendChild(techSpan);
+            });
+
+            for (const linkType in data.links) {
+                const link = document.createElement('a');
+                link.href = data.links[linkType];
+                link.textContent = linkType.charAt(0).toUpperCase() + linkType.slice(1);
+                link.className = 'btn btn-small';
+                if (linkType !== 'live' && linkType !== 'prototype') {
+                    link.classList.add('btn-outline');
+                }
+                link.target = '_blank';
+                modalProjectLinks.appendChild(link);
+            }
         }
         
-        slider.addEventListener('mousedown', function() {
-            document.addEventListener('mousemove', updateSliderPosition);
-            document.addEventListener('mouseup', function() {
-                document.removeEventListener('mousemove', updateSliderPosition);
+        function openModal(projectId) {
+            populateProjectModal(projectId);
+            projectModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.project-card .btn-view-project, .project-card .project-card-image').forEach(item => {
+            // Changed to listen on project-card-image div instead of its 'a' tag for broader click area
+            item.addEventListener('click', function(event) {
+                event.preventDefault();
+                const card = this.closest('.project-card');
+                const projectId = card.dataset.projectId;
+                openModal(projectId);
             });
         });
         
-        // Also make slider draggable via touch events
-        slider.addEventListener('touchstart', function() {
-            document.addEventListener('touchmove', function(e) {
-                updateSliderPosition(e.touches[0]);
-            });
-            document.addEventListener('touchend', function() {
-                document.removeEventListener('touchmove', updateSliderPosition);
-            });
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        projectModal.addEventListener('click', function(event) {
+            if (event.target === projectModal) {
+                closeModal();
+            }
         });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && projectModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
 
         // Form submission
         const contactForm = document.getElementById('contactForm');

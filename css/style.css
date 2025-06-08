@@ -695,6 +695,123 @@ section {
     opacity: 0.1;
 }
 
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Min card width 320px */
+    gap: 32px;
+    margin-top: 48px; /* From section header */
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--deep-blue); /* Slightly lighter than var(--navy) */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    color: var(--light-text);
+    transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
+}
+
+.project-card:hover {
+    transform: translateY(-8px); /* Slightly more lift */
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
+}
+
+.project-card-image {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    overflow: hidden;
+}
+.project-card-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.3s ease;
+    filter: saturate(0.7) brightness(0.85); /* Initial dimmed state */
+}
+
+.project-card:hover .project-card-image img {
+    transform: scale(1.08); /* Slightly adjusted zoom */
+    filter: saturate(1) brightness(1); /* Restore full color and brightness */
+}
+
+.project-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 26, 51, 0.9); /* var(--navy) with alpha */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
+    opacity: 0;
+    transform: translateY(20px); /* Initial slight offset for animation */
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+}
+
+.project-card:hover .project-card-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-card-overlay .project-title { /* Target h3 inside overlay */
+    font-size: 1.625rem; /* ~26px */
+    color: #ffffff;
+    margin-bottom: 12px;
+    transform: translateY(10px);
+    transition: transform 0.35s ease-out 0.1s, opacity 0.35s ease-out 0.1s; /* Delay for staggered entry */
+    opacity: 0;
+}
+.project-card-overlay .project-tech {
+    font-size: 0.9375rem; /* ~15px */
+    color: var(--electric-blue);
+    margin-bottom: 24px;
+    transform: translateY(10px);
+    transition: transform 0.35s ease-out 0.15s, opacity 0.35s ease-out 0.15s;
+    opacity: 0;
+}
+.project-card-overlay .project-tech i {
+    font-size: 1.6rem; /* Larger icons */
+    margin: 0 6px;
+}
+.project-card-overlay .btn-view-project {
+    background-color: var(--electric-blue);
+    color: var(--navy);
+    padding: 12px 28px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transform: translateY(10px);
+    transition: all 0.35s ease-out 0.2s;
+    opacity: 0;
+}
+
+.project-card:hover .project-card-overlay .project-title,
+.project-card:hover .project-card-overlay .project-tech,
+.project-card:hover .project-card-overlay .btn-view-project {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-card-overlay .btn-view-project:hover {
+    background-color: var(--lightning-blue);
+    color: white;
+    transform: translateY(-3px); /* Only the hover lift, initial offset removed by .project-card:hover ... .btn-view-project */
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.25);
+}
+
+
 .projects .section-header h2 {
     color: white;
 }
@@ -719,7 +836,7 @@ section {
     background: #000;
 }
 
-.before, .after {
+/* .before, .after { REMOVING as part of grid refactor */
     position: absolute;
     top: 0;
     left: 0;
@@ -731,94 +848,94 @@ section {
 .before {
     width: 50%;
     z-index: 2;
-}
+} */
 
-.before img, .after img {
+/* .before img, .after img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
+} */
 
-.slider {
+/* .slider {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 3px; /* Slightly thinner slider line */
+    width: 3px;
     height: 100%;
     background: white;
     z-index: 10;
     transform: translateX(-50%);
     cursor: ew-resize;
-}
+} */
 
-.slider::before {
+/* .slider::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50px; /* Reduced size */
-    height: 50px; /* Reduced size */
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    background: var(--electric-blue); /* Changed background to electric blue */
+    background: var(--electric-blue);
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 15px rgba(0, 204, 255, 0.4); /* Adjusted shadow for new bg */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
-}
+    box-shadow: 0 0 15px rgba(0, 204, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+} */
 
-.slider:hover::before {
-    transform: translate(-50%, -50%) scale(1.1); /* Hover effect */
-    box-shadow: 0 0 20px rgba(0, 204, 255, 0.6); /* Enhanced shadow on hover */
-}
+/* .slider:hover::before {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.6);
+} */
 
-.slider::after {
+/* .slider::after {
     content: '↔';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white; /* Changed icon color to white */
-    font-size: 1.25rem; /* Slightly adjusted font size */
+    color: white;
+    font-size: 1.25rem;
     font-weight: bold;
-}
+} */
 
-.comparison-label {
+/* .comparison-label {
     position: absolute;
     bottom: 20px;
-    padding: 10px 16px; /* Adjusted padding */
+    padding: 10px 16px;
     background: rgba(0, 0, 0, 0.7);
     color: white;
     border-radius: 30px;
     font-weight: 500;
-    font-size: 0.9rem; /* Adjusted font-size */
+    font-size: 0.9rem;
     z-index: 5;
-}
+} */
 
-.before-label {
+/* .before-label {
     left: 20px;
-}
+} */
 
-.after-label {
+/* .after-label {
     right: 20px;
-}
+} */
 
-.project-details {
+/* .project-details {
     max-width: 700px;
-    margin: 32px auto 0; /* Adjusted margin-top */
+    margin: 32px auto 0;
     text-align: center;
-}
+} */
 
-.project-details h3 {
-    font-size: 1.75rem; /* Adjusted font-size */
-    margin-bottom: 12px; /* Adjusted margin-bottom */
-}
+/* .project-details h3 {
+    font-size: 1.75rem;
+    margin-bottom: 12px;
+} */
 
-.project-details p {
-    opacity: 0.85; /* Adjusted opacity */
-    font-size: 1.0625rem; /* Adjusted font-size */
-}
+/* .project-details p {
+    opacity: 0.85;
+    font-size: 1.0625rem;
+} */
 
 /* Contact Section */
 section.contact { /* Ensure section-specific padding is applied if not already global */
@@ -1008,6 +1125,142 @@ footer {
     color: rgba(255, 255, 255, 0.55); /* Adjusted color opacity */
     font-size: 0.875rem; /* Adjusted font-size */
 }
+
+/* Project Detail Modal Styles */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 26, 51, 0.85); /* var(--navy) with transparency */
+    z-index: 2000;
+    display: flex; /* Hidden by default via inline style, JS toggles to flex */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.project-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+}
+
+.modal-dialog {
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: #ffffff;
+    color: var(--dark-text);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    position: relative;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-modal.active .modal-dialog {
+    transform: scale(1) translateY(0);
+}
+
+.modal-content-box {
+    padding: 32px 40px;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--deep-blue);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    color: var(--lightning-blue);
+}
+
+.modal-project-title { /* h2 */
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.modal-project-body {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to 1 column */
+    gap: 32px;
+}
+
+.modal-project-media {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.modal-project-media img { /* For single image case */
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.comparison-container-modal {
+    height: auto;
+    max-height: 450px;
+    margin: 0 auto;
+    /* Ensure child .slider and .comparison-label styles from global scope apply or are overridden if needed */
+}
+.comparison-container-modal .slider {
+    /* Potentially adjust if needed for modal context, else global style applies */
+}
+
+
+.modal-project-details-text h3 {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-top: 24px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.modal-project-details-text p,
+.modal-project-details-text div {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.modal-project-tech-icons .skill {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.modal-project-links-list .btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--lightning-blue);
+    border: 2px solid var(--lightning-blue);
+}
+.btn-outline:hover {
+    background-color: var(--lightning-blue);
+    color: white;
+}
+
 
 /* Blog Section Styles */
 .blog {
