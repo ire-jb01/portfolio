@@ -417,6 +417,19 @@ section {
     padding: 0 50px;
     border-radius: 20px;
     box-sizing: border-box;
+    opacity: 0; /* Default opacity */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Transition */
+    transform: translateX(20px) scale(0.98); /* Initial transform */
+}
+
+.service-card.slide-is-active {
+    opacity: 1; /* Active opacity */
+    transform: translateX(0) scale(1); /* Active transform */
+}
+
+.service-card.slide-is-leaving {
+    opacity: 0; /* Leaving opacity */
+    transform: translateX(-20px) scale(0.98); /* Leaving transform */
 }
 
 .service-content {
@@ -441,6 +454,52 @@ section {
     background: linear-gradient(90deg, var(--lightning-blue), var(--electric-blue));
 }
 
+/* Initial states for elements within .service-content */
+.service-icon,
+.service-title,
+.service-description,
+.feature,
+.service-content .btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.service-icon {
+    transform: scale(0.9); /* Specific initial transform for icon */
+}
+
+/* Active states for elements when .service-card.slide-is-active */
+.slide-is-active .service-icon,
+.slide-is-active .service-title,
+.slide-is-active .service-description,
+.slide-is-active .feature,
+.slide-is-active .service-content .btn {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.slide-is-active .service-icon {
+    transform: scale(1); /* Specific active transform for icon */
+}
+
+/* Transition delays for staggered effect */
+.slide-is-active .service-icon {
+    transition-delay: 0.3s;
+}
+.slide-is-active .service-title {
+    transition-delay: 0.4s;
+}
+.slide-is-active .service-description {
+    transition-delay: 0.5s;
+}
+.slide-is-active .feature {
+    transition-delay: 0.6s;
+}
+.slide-is-active .service-content .btn {
+    transition-delay: 0.7s;
+}
+
 .service-icon {
     width: 100px;
     height: 100px;
@@ -452,12 +511,14 @@ section {
     border-radius: 50%;
     color: var(--lightning-blue);
     font-size: 2.5rem;
+    /* Base transition is now set above, ensure it doesn't conflict if specific icon transitions are needed later */
 }
 
 .service-title {
     font-size: 2.2rem;
     margin-bottom: 20px;
     color: var(--navy);
+    /* Base transition is now set above */
 }
 
 .service-description {
@@ -467,6 +528,7 @@ section {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    /* Base transition is now set above */
 }
 
 .service-features {
@@ -485,16 +547,22 @@ section {
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: var(--transition);
+    /* Combined transition: existing hover + new entry */
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .feature:hover {
     background: rgba(0, 102, 255, 0.1);
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* This will be overridden by entry animation if not active, which is fine */
 }
 
 .feature i {
     color: var(--electric-blue);
+}
+
+/* Ensure .service-content .btn also respects its own hover/active states if any, currently uses global .btn styles */
+.service-content .btn {
+    /* Base transition is now set above, global .btn hover/active will still apply */
 }
 
 .slider-nav {
@@ -510,12 +578,20 @@ section {
     border-radius: 50%;
     background: rgba(0, 102, 255, 0.3);
     cursor: pointer;
-    transition: var(--transition);
+    border: 2px solid transparent; /* Added border */
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease; /* Refined transition */
+}
+
+.slider-dot:hover {
+    transform: scale(1.1); /* Hover scale */
+    border-color: var(--electric-blue); /* Hover border color */
 }
 
 .slider-dot.active {
-    background: var(--lightning-blue);
-    transform: scale(1.2);
+    background-color: var(--lightning-blue); /* Active background */
+    transform: scale(1.3); /* Active scale */
+    border-color: var(--lightning-blue); /* Active border color */
+    box-shadow: 0 0 8px rgba(0, 102, 255, 0.5); /* Active box shadow */
 }
 
 .slider-btn {
@@ -531,16 +607,34 @@ section {
     justify-content: center;
     box-shadow: var(--shadow);
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Refined transition */
     z-index: 10;
     color: var(--lightning-blue);
     font-size: 1.5rem;
 }
 
+.slider-btn i {
+    transition: transform 0.2s ease; /* Transition for icon */
+}
+
 .slider-btn:hover {
     background: var(--lightning-blue);
     color: white;
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.15); /* Modified hover transform */
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3); /* Enhanced hover box-shadow */
+}
+
+.prev-btn:hover i {
+    transform: translateX(-2px); /* Icon animation on hover */
+}
+
+.next-btn:hover i {
+    transform: translateX(2px); /* Icon animation on hover */
+}
+
+.slider-btn:active {
+    transform: translateY(-50%) scale(1.05); /* Active transform */
+    box-shadow: 0 4px 10px rgba(0, 102, 255, 0.2); /* Reduced active box-shadow */
 }
 
 .prev-btn {

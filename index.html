@@ -452,6 +452,7 @@
                 this.currentSlide = 0;
                 this.slideCount = this.slides.length;
                 this.autoSlideInterval = null;
+                this.slideChangeDuration = 500; // Added property
                 
                 // Initialize slider
                 this.init();
@@ -479,16 +480,37 @@
             }
             
             showSlide(index) {
-                // Update current slide
-                this.currentSlide = index;
-                
-                // Update container position
-                this.container.style.transform = `translateX(-${this.currentSlide * 100}%)`;
-                
-                // Update active dot
-                this.dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === this.currentSlide);
+                const outgoingSlideIndex = this.currentSlide;
+                const outgoingSlide = this.slides[outgoingSlideIndex];
+
+                // If there's an outgoing slide and it's different from the new index
+                if (outgoingSlide && outgoingSlideIndex !== index) {
+                    outgoingSlide.classList.add('slide-is-leaving');
+                }
+
+                // Remove active and leaving classes from all slides
+                this.slides.forEach(slide => {
+                    slide.classList.remove('slide-is-active');
+                    // Keep slide-is-leaving until the new slide is ready to be shown
                 });
+
+                // Delay transform and active class addition
+                setTimeout(() => {
+                    this.container.style.transform = `translateX(-${index * 100}%)`;
+
+                    // Remove leaving class after transition could have played
+                    if (outgoingSlide && outgoingSlideIndex !== index) {
+                         outgoingSlide.classList.remove('slide-is-leaving');
+                    }
+
+                    this.slides[index].classList.add('slide-is-active');
+                    this.currentSlide = index;
+
+                    // Update active dot
+                    this.dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === this.currentSlide);
+                    });
+                }, this.slideChangeDuration / 2); // Delay slightly less than full duration for overlap
             }
             
             nextSlide() {
