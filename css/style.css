@@ -71,6 +71,11 @@ header.scrolled {
     text-decoration: none;
     display: flex;
     align-items: center;
+    transition: color 0.3s ease; /* Added for hover effect */
+}
+
+.logo:hover {
+    color: var(--electric-blue); /* Logo hover color */
 }
 
 .logo i {
@@ -124,25 +129,28 @@ header.scrolled {
     cursor: pointer;
 }
 
+.menu-toggle i {
+    transition: transform 0.3s ease; /* Transition for icon animation */
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 0 80px;
-    position: relative;
-    overflow: hidden;
+    padding: 128px 0 96px; /* Adjusted padding */
+    background-color: var(--navy); /* Set a solid dark background */
+    position: relative; /* Ensure stacking context */
+    overflow: hidden; /* Already there, good */
 }
 
 .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 204, 255, 0.1) 0%, rgba(0, 102, 255, 0.05) 70%, transparent 100%);
-    z-index: -1;
+    /* This light radial gradient might conflict with dark trails.
+       Consider removing it or ensuring it's behind the canvas if trails are dark.
+       For now, let's comment it out or ensure its z-index is lower than canvas.
+       If we set hero background to navy, this ::before might not be needed or desired.
+    */
+    display: none; /* Simplest way to hide it for now to ensure dark bg */
 }
 
 #particle-canvas {
@@ -151,21 +159,21 @@ header.scrolled {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 1; /* Above hero background, below content */
 }
 
 .hero-content {
     max-width: 650px;
     animation: fadeUp 1s ease-out;
-    position: relative;
-    z-index: 2;
+    position: relative; /* Ensure it has its own stacking context if not already */
+    z-index: 2; /* Above canvas */
 }
 
 .hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--navy);
-    line-height: 1.1;
+    font-size: 3.25rem; /* Slightly adjusted font size */
+    margin-bottom: 24px; /* Adjusted margin */
+    color: #fff;
+    line-height: 1.15; /* Adjusted line-height for readability */
 }
 
 .hero h1 span {
@@ -176,18 +184,19 @@ header.scrolled {
 .hero h1 span::after {
     content: '';
     position: absolute;
-    bottom: 5px;
+    bottom: 4px; /* Adjusted bottom position */
     left: 0;
     width: 100%;
     height: 10px;
-    background: rgba(0, 204, 255, 0.3);
+    background: rgba(0, 204, 255, 0.2); /* Adjusted background color */
     z-index: -1;
+    border-radius: 2px; /* Added border-radius */
 }
 
 .hero p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    color: var(--deep-blue);
+    font-size: 1.25rem; /* Slightly adjusted font size */
+    margin-bottom: 32px; /* Adjusted margin */
+    color: #bcbcbc;
     max-width: 550px;
 }
 
@@ -237,7 +246,7 @@ section {
 
 .section-header {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: 64px; /* Adjusted margin */
 }
 
 .section-header h2 {
@@ -270,7 +279,7 @@ section {
 .about-content {
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: 64px; /* Adjusted gap */
 }
 
 .about-text {
@@ -278,38 +287,38 @@ section {
 }
 
 .about-text h3 {
-    font-size: 2rem;
+    font-size: 1.875rem; /* Adjusted font-size (e.g., 30px if base is 16px) */
     color: var(--navy);
-    margin-bottom: 20px;
+    margin-bottom: 16px; /* Adjusted margin */
 }
 
 .about-text p {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+    margin-bottom: 16px; /* Adjusted margin */
+    font-size: 1.0625rem; /* Adjusted font-size (e.g., 17px) */
 }
 
 .skills {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 30px;
+    gap: 12px; /* Adjusted gap */
+    margin-top: 24px; /* Adjusted margin */
 }
 
 .skill {
     background: rgba(0, 102, 255, 0.1);
     color: var(--lightning-blue);
-    padding: 8px 20px;
+    padding: 10px 24px; /* Adjusted padding */
     border-radius: 50px;
     font-weight: 500;
     font-size: 0.9rem;
-    transition: 0.5s ease-in-out;
+    transition: all 0.3s ease-out; /* Refined transition */
 }
+
 .skill:hover{
-    transform: translateY(-10px);
+    transform: translateY(-5px); /* Reduced translateY */
     background-color: var(--lightning-blue);
-    color: rgb(254, 254, 254);
+    color: white; /* Ensure text color is white for contrast */
     cursor: pointer;
-    transition: 0.5s ease-in-out;
 }
 
 .about-image {
@@ -320,19 +329,19 @@ section {
 .profile-card {
     background: white;
     border-radius: 20px;
-    padding: 30px;
+    padding: 32px; /* Adjusted padding */
     box-shadow: var(--shadow);
     text-align: center;
     max-width: 350px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    transition: 0.5s ease-in-out;
+    transition: transform 0.3s ease-out; /* Refined transition */
 }
+
 .profile-card:hover{
-    transform: translateY(-7px);
-    transition: 0.5s ease-in-out;
-    cursor: pointer;
+    transform: translateY(-5px); /* Reduced translateY */
+    /* transition: 0.5s ease-in-out; cursor: pointer; */ /* Removed as combined above */
 }
 
 .profile-card::before {
@@ -345,11 +354,38 @@ section {
     background: linear-gradient(90deg, var(--lightning-blue), var(--electric-blue));
 }
 
+.profile-card .social-links { /* Moved inline style to CSS */
+    justify-content: center;
+    margin-top: 24px; /* Adjusted margin */
+    gap: 15px; /* Added gap for consistency if not already via global .social-links */
+}
+
+.profile-card .social-link {
+    background: rgba(0, 102, 255, 0.08); /* Base background for profile card links */
+    color: var(--deep-blue); /* Default icon color */
+    width: 40px; /* Slightly smaller if desired */
+    height: 40px;
+    border-radius: 20px;
+    transition: 0.5s ease-in-out;
+}
+.profile-card .fab{
+    font-size: 25px;
+    margin-top: 6px;
+}
+
+.profile-card .social-link:hover {
+    background: var(--electric-blue);
+    color: white;
+    transform: translateY(-3px);
+    transition: 0.5s ease-in-out;
+}
+
+
 .profile-img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    margin: 0 auto 40px;
+    margin: 0 auto 32px; /* Adjusted margin */
     overflow: hidden;
     position: relative;
     border: 5px solid white;
@@ -361,9 +397,9 @@ section {
     height: 100%;
     object-fit: cover;
 }
-.fab{
-    color:  var(--dark-text);
-}
+
+/* .fab color is handled by .profile-card .social-link now if specific context is needed */
+/* Removed general .fab rule if it was conflicting */
 
 
 .profile-img::before {
@@ -380,6 +416,7 @@ section {
 
 /* Services Section */
 .services {
+    padding: 96px 0; /* Adjusted section padding */
     background: var(--light-gray);
     position: relative;
     overflow: hidden;
@@ -417,6 +454,19 @@ section {
     padding: 0 50px;
     border-radius: 20px;
     box-sizing: border-box;
+    opacity: 0; /* Default opacity */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Transition */
+    transform: translateX(20px) scale(0.98); /* Initial transform */
+}
+
+.service-card.slide-is-active {
+    opacity: 1; /* Active opacity */
+    transform: translateX(0) scale(1); /* Active transform */
+}
+
+.service-card.slide-is-leaving {
+    opacity: 0; /* Leaving opacity */
+    transform: translateX(-20px) scale(0.98); /* Leaving transform */
 }
 
 .service-content {
@@ -441,6 +491,52 @@ section {
     background: linear-gradient(90deg, var(--lightning-blue), var(--electric-blue));
 }
 
+/* Initial states for elements within .service-content */
+.service-icon,
+.service-title,
+.service-description,
+.feature,
+.service-content .btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.service-icon {
+    transform: scale(0.9); /* Specific initial transform for icon */
+}
+
+/* Active states for elements when .service-card.slide-is-active */
+.slide-is-active .service-icon,
+.slide-is-active .service-title,
+.slide-is-active .service-description,
+.slide-is-active .feature,
+.slide-is-active .service-content .btn {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.slide-is-active .service-icon {
+    transform: scale(1); /* Specific active transform for icon */
+}
+
+/* Transition delays for staggered effect */
+.slide-is-active .service-icon {
+    transition-delay: 0.3s;
+}
+.slide-is-active .service-title {
+    transition-delay: 0.4s;
+}
+.slide-is-active .service-description {
+    transition-delay: 0.5s;
+}
+.slide-is-active .feature {
+    transition-delay: 0.6s;
+}
+.slide-is-active .service-content .btn {
+    transition-delay: 0.7s;
+}
+
 .service-icon {
     width: 100px;
     height: 100px;
@@ -452,12 +548,14 @@ section {
     border-radius: 50%;
     color: var(--lightning-blue);
     font-size: 2.5rem;
+    /* Base transition is now set above, ensure it doesn't conflict if specific icon transitions are needed later */
 }
 
 .service-title {
     font-size: 2.2rem;
     margin-bottom: 20px;
     color: var(--navy);
+    /* Base transition is now set above */
 }
 
 .service-description {
@@ -467,6 +565,7 @@ section {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    /* Base transition is now set above */
 }
 
 .service-features {
@@ -485,16 +584,22 @@ section {
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: var(--transition);
+    /* Combined transition: existing hover + new entry */
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .feature:hover {
     background: rgba(0, 102, 255, 0.1);
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* This will be overridden by entry animation if not active, which is fine */
 }
 
 .feature i {
     color: var(--electric-blue);
+}
+
+/* Ensure .service-content .btn also respects its own hover/active states if any, currently uses global .btn styles */
+.service-content .btn {
+    /* Base transition is now set above, global .btn hover/active will still apply */
 }
 
 .slider-nav {
@@ -510,12 +615,20 @@ section {
     border-radius: 50%;
     background: rgba(0, 102, 255, 0.3);
     cursor: pointer;
-    transition: var(--transition);
+    border: 2px solid transparent; /* Added border */
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease; /* Refined transition */
+}
+
+.slider-dot:hover {
+    transform: scale(1.1); /* Hover scale */
+    border-color: var(--electric-blue); /* Hover border color */
 }
 
 .slider-dot.active {
-    background: var(--lightning-blue);
-    transform: scale(1.2);
+    background-color: var(--lightning-blue); /* Active background */
+    transform: scale(1.3); /* Active scale */
+    border-color: var(--lightning-blue); /* Active border color */
+    box-shadow: 0 0 8px rgba(0, 102, 255, 0.5); /* Active box shadow */
 }
 
 .slider-btn {
@@ -531,16 +644,34 @@ section {
     justify-content: center;
     box-shadow: var(--shadow);
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Refined transition */
     z-index: 10;
     color: var(--lightning-blue);
     font-size: 1.5rem;
 }
 
+.slider-btn i {
+    transition: transform 0.2s ease; /* Transition for icon */
+}
+
 .slider-btn:hover {
     background: var(--lightning-blue);
     color: white;
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.15); /* Modified hover transform */
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3); /* Enhanced hover box-shadow */
+}
+
+.prev-btn:hover i {
+    transform: translateX(-2px); /* Icon animation on hover */
+}
+
+.next-btn:hover i {
+    transform: translateX(2px); /* Icon animation on hover */
+}
+
+.slider-btn:active {
+    transform: translateY(-50%) scale(1.05); /* Active transform */
+    box-shadow: 0 4px 10px rgba(0, 102, 255, 0.2); /* Reduced active box-shadow */
 }
 
 .prev-btn {
@@ -553,11 +684,11 @@ section {
 
 /* Projects Section */
 .projects {
+    padding: 96px 0; /* Adjusted section padding */
     background: linear-gradient(135deg, var(--navy) 0%, var(--deep-blue) 100%);
     color: var(--light-text);
     position: relative;
     overflow: hidden;
-
 }
 
 .projects::before {
@@ -619,7 +750,7 @@ section {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 4px;
+    width: 3px; /* Slightly thinner slider line */
     height: 100%;
     background: white;
     z-index: 10;
@@ -632,15 +763,21 @@ section {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px; /* Reduced size */
+    height: 50px; /* Reduced size */
     border-radius: 50%;
-    background: white;
+    background: var(--electric-blue); /* Changed background to electric blue */
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(0, 204, 255, 0.4); /* Adjusted shadow for new bg */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+}
+
+.slider:hover::before {
+    transform: translate(-50%, -50%) scale(1.1); /* Hover effect */
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.6); /* Enhanced shadow on hover */
 }
 
 .slider::after {
@@ -649,19 +786,20 @@ section {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--lightning-blue);
-    font-size: 1.5rem;
+    color: white; /* Changed icon color to white */
+    font-size: 1.25rem; /* Slightly adjusted font size */
     font-weight: bold;
 }
 
 .comparison-label {
     position: absolute;
     bottom: 20px;
-    padding: 8px 20px;
+    padding: 10px 16px; /* Adjusted padding */
     background: rgba(0, 0, 0, 0.7);
     color: white;
     border-radius: 30px;
     font-weight: 500;
+    font-size: 0.9rem; /* Adjusted font-size */
     z-index: 5;
 }
 
@@ -675,24 +813,28 @@ section {
 
 .project-details {
     max-width: 700px;
-    margin: 40px auto 0;
+    margin: 32px auto 0; /* Adjusted margin-top */
     text-align: center;
 }
 
 .project-details h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 1.75rem; /* Adjusted font-size */
+    margin-bottom: 12px; /* Adjusted margin-bottom */
 }
 
 .project-details p {
-    opacity: 0.9;
-    font-size: 1.1rem;
+    opacity: 0.85; /* Adjusted opacity */
+    font-size: 1.0625rem; /* Adjusted font-size */
 }
 
 /* Contact Section */
+section.contact { /* Ensure section-specific padding is applied if not already global */
+    padding: 96px 0; 
+}
+
 .contact-content {
     display: flex;
-    gap: 60px;
+    gap: 64px; /* Adjusted gap */
 }
 
 .contact-info {
@@ -700,69 +842,79 @@ section {
 }
 
 .contact-info h3 {
-    font-size: 1.8rem;
+    font-size: 1.75rem; /* Adjusted font size */
     color: var(--navy);
-    margin-bottom: 25px;
+    margin-bottom: 24px; /* Adjusted margin */
 }
 
 .contact-item {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 25px;
+    margin-bottom: 24px; /* Adjusted margin */
 }
 
 .contact-icon {
-    width: 50px;
-    height: 50px;
+    width: 48px; /* Adjusted size */
+    height: 48px; /* Adjusted size */
     background: rgba(0, 102, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 15px;
+    margin-right: 16px; /* Adjusted margin */
     color: var(--lightning-blue);
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Adjusted icon size */
 }
 
 .contact-text h4 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+    font-size: 1.125rem; /* Adjusted font size (e.g., 18px) */
+    margin-bottom: 4px; /* Adjusted margin */
     color: var(--deep-blue);
+}
+
+.contact-text p {
+    font-size: 0.9375rem; /* Adjusted font size (e.g., 15px) */
 }
 
 .contact-form {
     flex: 1;
     background: white;
-    padding: 40px;
-    border-radius: 20px;
+    padding: 48px; /* Adjusted padding */
+    border-radius: 12px; /* Slightly adjusted border-radius */
     box-shadow: var(--shadow);
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 24px; /* Adjusted margin */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px; /* Adjusted margin */
     font-weight: 500;
+    font-size: 0.9375rem; /* Adjusted font-size */
     color: var(--deep-blue);
 }
 
 .form-control {
     width: 100%;
-    padding: 14px 20px;
-    border: 2px solid #e1e8ed;
-    border-radius: 10px;
+    padding: 16px 20px; /* Adjusted padding */
+    border: 1px solid #ced4da; /* Adjusted border */
+    border-radius: 8px; /* Adjusted border-radius */
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
-    transition: var(--transition);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Specific transition */
 }
 
 .form-control:focus {
     outline: none;
-    border-color: var(--electric-blue);
-    box-shadow: 0 0 0 3px rgba(0, 204, 255, 0.2);
+    border-color: var(--lightning-blue); /* Changed focus border color */
+    box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.15); /* Adjusted focus shadow */
+}
+
+.contact-form .btn {
+    display: block; /* Make button full-width */
+    width: 100%;
 }
 
 textarea.form-control {
@@ -774,53 +926,55 @@ textarea.form-control {
 footer {
     background: var(--navy);
     color: var(--light-text);
-    padding: 60px 0 30px;
+    padding: 64px 0 32px; /* Adjusted padding */
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 50px;
+    gap: 48px; /* Using gap for spacing */
+    margin-bottom: 48px; /* Adjusted margin */
 }
 
 .footer-about {
     flex: 2;
-    margin-right: 50px;
+    /* margin-right: 50px; */ /* Replaced by gap on parent */
 }
 
 .footer-about h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    font-size: 1.75rem; /* Adjusted font-size */
+    margin-bottom: 16px; /* Adjusted margin */
     color: white;
 }
 
 .footer-about p {
-    opacity: 0.8;
-    margin-bottom: 20px;
+    opacity: 0.75; /* Adjusted opacity */
+    margin-bottom: 16px; /* Adjusted margin */
     max-width: 400px;
+    font-size: 0.9375rem; /* Adjusted font-size */
 }
 
-.social-links {
+.social-links { /* This is a general class, ensure footer specific styles are targeted if needed */
     display: flex;
-    gap: 15px;
+    gap: 12px; /* Adjusted gap */
 }
 
-.social-link {
+.footer-about .social-link { /* Targeting social links within footer-about specifically */
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 42px; /* Adjusted size */
+    height: 42px; /* Adjusted size */
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     color: white;
-    font-size: 1.2rem;
-    transition: var(--transition);
+    font-size: 1.1rem; /* Adjusted icon size */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Refined transition */
 }
 
-.social-link:hover {
+.footer-about .social-link:hover {
     background: var(--electric-blue);
-    transform: translateY(-5px);
+    transform: translateY(-3px); /* Reduced transform */
 }
 
 .footer-links {
@@ -828,8 +982,8 @@ footer {
 }
 
 .footer-links h4 {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
+    font-size: 1.25rem; /* Adjusted font-size */
+    margin-bottom: 16px; /* Adjusted margin */
     color: white;
 }
 
@@ -838,26 +992,149 @@ footer {
 }
 
 .footer-links li {
-    margin-bottom: 12px;
+    margin-bottom: 10px; /* Adjusted margin */
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.75); /* Adjusted color opacity */
     text-decoration: none;
-    transition: var(--transition);
+    font-size: 0.9375rem; /* Adjusted font-size */
+    transition: color 0.3s ease; /* Refined transition */
 }
 
 .footer-links a:hover {
     color: var(--electric-blue);
-    padding-left: 5px;
+    text-decoration: underline; /* Added underline on hover */
+    /* padding-left: 5px; */ /* Removed padding shift */
 }
 
 .copyright {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 32px; /* Adjusted padding */
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55); /* Adjusted color opacity */
+    font-size: 0.875rem; /* Adjusted font-size */
+}
+
+/* Blog Section Styles */
+.blog {
+    padding: 96px 0;
+    background-color: var(--light-gray);
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-top: 48px; /* Space below section header, consistent with .section-header margin-bottom */
+}
+
+.blog-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 102, 255, 0.2);
+}
+
+.blog-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.05);
+}
+
+.blog-card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-meta {
+    font-size: 0.875rem; /* 14px */
+    color: #777;
+    margin-bottom: 8px;
+}
+
+.blog-meta span {
+    margin-right: 5px; /* Spacing between date and read time if they were separate spans */
+}
+
+.blog-title { /* This is an h3 */
+    font-size: 1.375rem; /* 22px */
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.blog-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.blog-title a:hover {
+    color: var(--lightning-blue);
+}
+
+.blog-excerpt {
+    font-size: 0.9375rem; /* 15px */
+    color: var(--deep-blue);
+    margin-bottom: 16px;
+    line-height: 1.6;
+    flex-grow: 1; 
+}
+
+.blog-tags {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.blog-tags span {
+    background-color: rgba(0, 102, 255, 0.1);
+    color: var(--lightning-blue);
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.8125rem; /* 13px */
+    font-weight: 500;
+}
+
+.blog-read-more {
+    padding: 10px 20px;
+    font-size: 0.9375rem; /* 15px */
+    align-self: flex-start;
+}
+
+.btn-secondary { /* General secondary button style if not already present */
+    background: var(--deep-blue);
+    color: white;
+}
+.btn-secondary:hover {
+    background: var(--navy);
+    box-shadow: 0 8px 25px rgba(0, 26, 51, 0.2);
+}
+
+.blog-read-more i {
+    margin-left: 8px;
 }
 
 /* Animations */
@@ -891,15 +1168,16 @@ footer {
 @media (max-width: 992px) {
     .about-content, .contact-content {
         flex-direction: column;
+        gap: 48px; /* Adjusted gap for column layout */
     }
     
     .about-image {
-        margin-top: 50px;
+        margin-top: 48px; /* Adjusted margin */
     }
     
     .footer-content {
         flex-direction: column;
-        gap: 40px;
+        gap: 32px; /* Adjusted gap for footer column layout */
     }
     
     .footer-about {
@@ -913,6 +1191,10 @@ footer {
     .service-content {
         padding: 30px;
     }
+
+    .blog-grid {
+        gap: 24px; /* Optional: reduce gap on tablets */
+    }
 }
 
 @media (max-width: 768px) {
@@ -924,17 +1206,55 @@ footer {
         background: white;
         width: 80%;
         height: calc(100vh - 80px);
-        padding: 40px 30px;
-        transition: var(--transition);
+        padding: 50px 40px; /* Increased padding */
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Refined transition */
         box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        /* Ensure transform is used for slide-in, not just right property */
+        transform: translateX(100%); 
+        right: 0; /* Keep right at 0, use transform for animation */
     }
     
     .nav-links.active {
-        right: 0;
+        transform: translateX(0); /* Slide in to 0 */
     }
     
     .nav-links li {
-        margin: 0 0 25px 0;
+        margin: 0; /* Reset margin for mobile */
+        opacity: 0;
+        transform: translateX(20px);
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.active li:nth-child(2) { transition-delay: 0.15s; }
+    .nav-links.active li:nth-child(3) { transition-delay: 0.2s; }
+    .nav-links.active li:nth-child(4) { transition-delay: 0.25s; }
+    .nav-links.active li:nth-child(5) { transition-delay: 0.3s; }
+    .nav-links.active li:nth-child(6) { transition-delay: 0.35s; } /* New rule for the 6th item (Blog) */
+
+    .nav-links.active a {
+        font-size: 1.2rem; /* Larger font for mobile */
+        padding: 15px 0; /* Padding for touch target */
+        display: block; /* Make links block for full-width touch */
+        border-bottom: 1px solid #eee; /* Separator */
+    }
+
+    .nav-links.active li:last-child a {
+        border-bottom: none; /* Remove border for last item */
+    }
+
+    .nav-links.active a::after {
+        display: none; /* Remove desktop underline effect */
+    }
+
+    .nav-links.active a:hover {
+        background-color: rgba(0, 102, 255, 0.05); /* Mobile link hover/active */
+        color: var(--lightning-blue); /* Ensure hover color is consistent */
     }
     
     .menu-toggle {
@@ -942,15 +1262,36 @@ footer {
     }
     
     .hero h1 {
-        font-size: 2.8rem;
+        font-size: 2.8rem; /* No change, seems proportional */
     }
     
     .section-header h2 {
-        font-size: 2.2rem;
+        font-size: 2.2rem; /* Existing, seems fine */
+    }
+
+    .project-details h3 { /* Added responsive style */
+        font-size: 1.6rem;
+    }
+    .project-details p { /* Added responsive style */
+        font-size: 1rem;
+    }
+
+    .blog-grid { /* Allow slightly smaller cards before stacking */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px; 
+    }
+    .blog-title { 
+        font-size: 1.25rem; 
+    }
+    .blog-excerpt {
+        font-size: 0.9rem; 
+    }
+    .blog-card-image {
+        height: 180px; 
     }
 
     .service-title {
-        font-size: 1.8rem;
+        font-size: 1.8rem; /* Existing, seems fine */
     }
 
     .service-features {
@@ -967,15 +1308,44 @@ footer {
 
 @media (max-width: 576px) {
     .hero h1 {
-        font-size: 2.3rem;
+        font-size: 2.3rem; /* No change, seems proportional */
         text-align: center;
         padding: 0 15px;
     }
     
     .hero p {
-        font-size: 1.1rem;
+        font-size: 1.1rem; /* No change, seems proportional */
         text-align: center;
         padding: 0 15px;
+    }
+    
+    .project-details h3 { /* Added responsive style */
+        font-size: 1.375rem;
+    }
+    .project-details p { /* Added responsive style */
+        font-size: 0.9375rem;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr; /* Single column for mobile */
+        gap: 24px; 
+    }
+    .blog-card-content {
+        padding: 20px; 
+    }
+    .blog-title { 
+        font-size: 1.15rem; 
+    }
+    .blog-excerpt {
+        font-size: 0.875rem;
+    }
+    .blog-tags span {
+        padding: 5px 10px; 
+        font-size: 0.75rem;
+    }
+    .blog-read-more {
+        padding: 8px 16px;
+        font-size: 0.875rem;
     }
     
     .section-header h2 {

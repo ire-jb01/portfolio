@@ -25,6 +25,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -76,7 +77,7 @@
                         <p>Web Developer</p>
                         <div class="social-links" style="justify-content: center; margin-top: 20px;">
                             <a href="https://www.linkedin.com/in/john-borel-9750a5328/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/ire-jb01" class="social-link"><i class="fab fa-github"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
                         </div>
@@ -195,6 +196,104 @@
             </div>
         </div>
     </section>
+    <!-- End Projects Section -->
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest Posts</h2> <!-- Changed from "Blog" to be more engaging -->
+                <p>Insights, articles, and updates from my journey in web development.</p> <!-- More descriptive subtext -->
+            </div>
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <a href="#"><img src="modcss.png" alt="Blog Post Thumbnail 1"></a>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">October 26, 2023</span> | 
+                            <span class="blog-read-time">5 min read</span>
+                        </div>
+                        <h3 class="blog-title"><a href="#">Understanding Modern CSS Techniques</a></h3>
+                        <p class="blog-excerpt">A brief look into some of the powerful CSS features that are shaping contemporary web design and development practices.</p>
+                        <div class="blog-tags">
+                            <span>CSS3</span>
+                            <span>Frontend</span>
+                            <span>Web Design</span>
+                        </div>
+                        <a href="#" class="btn btn-secondary blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <a href="#"><img src="framework.png" alt="Blog Post Thumbnail 2"></a>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">October 22, 2023</span> | 
+                            <span class="blog-read-time">7 min read</span>
+                        </div>
+                        <h3 class="blog-title"><a href="#">JavaScript Frameworks: A Comparative Overview</a></h3>
+                        <p class="blog-excerpt">Exploring the key differences, strengths, and use cases for popular JavaScript frameworks in today's ecosystem.</p>
+                        <div class="blog-tags">
+                            <span>JavaScript</span>
+                            <span>React</span>
+                            <span>Vue</span>
+                            <span>Angular</span>
+                        </div>
+                        <a href="#" class="btn btn-secondary blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <a href="#"><img src="uiux.png" alt="Blog Post Thumbnail 3"></a>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">October 18, 2023</span> | 
+                            <span class="blog-read-time">4 min read</span>
+                        </div>
+                        <h3 class="blog-title"><a href="#">The Importance of UI/UX in Web Development</a></h3>
+                        <p class="blog-excerpt">Delving into why user interface and user experience design are critical for the success of any web project.</p>
+                        <div class="blog-tags">
+                            <span>UI/UX</span>
+                            <span>Design</span>
+                            <span>User Experience</span>
+                        </div>
+                        <a href="#" class="btn btn-secondary blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <a href="#"><img src="webop.png" alt="Blog Post Thumbnail 4"></a>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">October 15, 2023</span> | 
+                            <span class="blog-read-time">6 min read</span>
+                        </div>
+                        <h3 class="blog-title"><a href="#">Optimizing Website Performance: Key Strategies</a></h3>
+                        <p class="blog-excerpt">A rundown of essential techniques to boost your website's speed, responsiveness, and overall performance.</p>
+                        <div class="blog-tags">
+                            <span>Performance</span>
+                            <span>Optimization</span>
+                            <span>Web Dev</span>
+                        </div>
+                        <a href="#" class="btn btn-secondary blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div> <!-- /.blog-grid -->
+        </div> <!-- /.container -->
+    </section> <!-- /.blog -->
+    <!-- End Blog Section -->
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
@@ -308,8 +407,15 @@
                 this.canvas = document.getElementById(canvasId);
                 this.ctx = this.canvas.getContext('2d');
                 this.particles = [];
-                this.mouse = { x: null, y: null, radius: 100 };
-                this.particleCount = 100;
+                this.mouse = { 
+                    x: null, y: null, 
+                    magneticRadius: 280, // Slightly increased interaction range
+                    repulsionRadius: 70,  // Slightly reduced for a smaller "personal space"
+                    attractionForce: 0.04, // Slightly reduced
+                    repulsionForce: 0.20,  // Slightly increased
+                    lightRadius: 220 // Slightly increased light influence
+                };
+                this.particleCount = 70; // Reduced for performance with trails
                 
                 // Initialize animation
                 this.initCanvas();
@@ -342,30 +448,54 @@
                     const directionX = (Math.random() - 0.5) * 2;
                     const directionY = (Math.random() - 0.5) * 2;
                     
-                    // Create gradient colors
-                    const color1 = `rgba(0, 102, 255, ${Math.random() * 0.6 + 0.4})`;
-                    const color2 = `rgba(0, 204, 255, ${Math.random() * 0.6 + 0.4})`;
-                    
+                    const baseAlpha = Math.random() * 0.2 + 0.1; // Reduced base alpha (0.1 to 0.3)
+                    const shapeType = Math.random() < 0.7 ? 'circle' : 'square'; 
+                    let particleSize = Math.random() * 4 + 1; // Reduced max size slightly
+
                     this.particles.push({
-                        x, y, size,
+                        x, y,
+                        size: particleSize, // Main dimension
+                        shapeType: shapeType,
                         directionX, directionY,
-                        color1, color2
+                        baseColor1RGB: [0, 102, 255], 
+                        baseColor2RGB: [0, 204, 255],
+                        baseAlpha: baseAlpha,
+                        currentAlpha: baseAlpha, 
+                        vx: 0, 
+                        vy: 0
                     });
                 }
             }
             
             drawParticle(particle) {
-                // Create gradient
-                const gradient = this.ctx.createRadialGradient(
+                const color1String = `rgba(${particle.baseColor1RGB[0]}, ${particle.baseColor1RGB[1]}, ${particle.baseColor1RGB[2]}, ${particle.currentAlpha})`;
+                const color2String = `rgba(${particle.baseColor2RGB[0]}, ${particle.baseColor2RGB[1]}, ${particle.baseColor2RGB[2]}, ${particle.currentAlpha * 0.7})`;
+
+                const gradient = this.ctx.createRadialGradient( 
                     particle.x, particle.y, 0,
-                    particle.x, particle.y, particle.size
+                    particle.x, particle.y, particle.size * 1.5 
                 );
-                gradient.addColorStop(0, particle.color1);
-                gradient.addColorStop(1, particle.color2);
+                gradient.addColorStop(0, color1String);
+                gradient.addColorStop(1, color2String);
                 
-                this.ctx.beginPath();
-                this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                 this.ctx.fillStyle = gradient;
+
+                // Dynamic sizing based on speed
+                const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+                let dynamicSizeFactor = 1 - (speed / 15); // Particles need to move faster to shrink
+                dynamicSizeFactor = Math.max(0.2, Math.min(1.2, dynamicSizeFactor)); // Min size 20%, max 120%
+
+                const drawSize = particle.size * dynamicSizeFactor;
+
+                this.ctx.beginPath();
+
+                if (particle.shapeType === 'circle') {
+                    this.ctx.arc(particle.x, particle.y, drawSize, 0, Math.PI * 2);
+                } else if (particle.shapeType === 'square') {
+                    // Non-rotated square:
+                    this.ctx.rect(particle.x - drawSize / 2, particle.y - drawSize / 2, drawSize, drawSize);
+                }
+                
                 this.ctx.fill();
             }
             
@@ -401,33 +531,82 @@
                     if (p.x <= p.size || p.x >= this.canvas.width - p.size) {
                         p.directionX = -p.directionX;
                     }
-                    if (p.y <= p.size || p.y >= this.canvas.height - p.size) {
-                        p.directionY = -p.directionY;
-                    }
-                    
+                    // Update particle position based on its own velocity (incorporates inherent direction and mouse effects)
+                    p.vx += p.directionX * 0.02; // Reduced influence of autonomous drift
+                    p.vy += p.directionY * 0.02; // Reduced influence of autonomous drift
+
                     // Mouse interaction
                     if (this.mouse.x && this.mouse.y) {
                         const dx = p.x - this.mouse.x;
                         const dy = p.y - this.mouse.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < this.mouse.radius) {
-                            // Repel particles from mouse
-                            const force = (this.mouse.radius - distance) / this.mouse.radius;
-                            const angle = Math.atan2(dy, dx);
-                            const moveX = Math.cos(angle) * force * 5;
-                            const moveY = Math.sin(angle) * force * 5;
-                            
-                            p.x += moveX;
-                            p.y += moveY;
+                        const angle = Math.atan2(dy, dx);
+
+                        let forceMagnitude = 0;
+                        let forceDirection = 0; // 1 for repel, -1 for attract
+
+                        if (distance < this.mouse.repulsionRadius) {
+                            // Repulsion zone
+                            forceMagnitude = (this.mouse.repulsionRadius - distance) / this.mouse.repulsionRadius;
+                            forceDirection = 1;
+                            forceMagnitude *= this.mouse.repulsionForce; // Apply repulsion strength
+                        } else if (distance < this.mouse.magneticRadius) {
+                            // Attraction zone
+                            forceMagnitude = (this.mouse.magneticRadius - distance) / this.mouse.magneticRadius;
+                            forceDirection = -1;
+                            forceMagnitude *= this.mouse.attractionForce; // Apply attraction strength
                         }
+
+                        if (forceMagnitude > 0) {
+                            const accelX = Math.cos(angle) * forceMagnitude * forceDirection;
+                            const accelY = Math.sin(angle) * forceMagnitude * forceDirection;
+                            
+                            p.vx += accelX;
+                            p.vy += accelY;
+                        }
+                        
+                        if (distance < this.mouse.lightRadius) {
+                            const lightIntensity = 1 - (distance / this.mouse.lightRadius); // 0 to 1
+                            p.currentAlpha = p.baseAlpha + (1 - p.baseAlpha) * lightIntensity;
+                            p.currentAlpha = Math.min(1, Math.max(0, p.currentAlpha)); // Clamp between 0 and 1
+                        } else {
+                            // Gradually revert to baseAlpha
+                            p.currentAlpha += (p.baseAlpha - p.currentAlpha) * 0.05; // Smooth revert
+                        }
+                    } else {
+                        // No mouse, gradually revert to baseAlpha
+                         p.currentAlpha += (p.baseAlpha - p.currentAlpha) * 0.05; // Smooth revert
                     }
+
+                    // Apply damping/friction
+                    const dampingFactor = 0.94; // Slightly less damping
+                    p.vx *= dampingFactor;
+                    p.vy *= dampingFactor;
+
+                    // Update position with velocity
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Bounce off walls (using p.x, p.y and new p.vx, p.vy)
+                    if (p.x - p.size <= 0 || p.x + p.size >= this.canvas.width) {
+                        p.vx *= -1; // Reverse velocity component
+                        p.x = Math.max(p.size, Math.min(p.x, this.canvas.width - p.size)); // Clamp position
+                    }
+                    if (p.y - p.size <= 0 || p.y + p.size >= this.canvas.height) {
+                        p.vy *= -1; // Reverse velocity component
+                        p.y = Math.max(p.size, Math.min(p.y, this.canvas.height - p.size)); // Clamp position
+                    }
+                    // Old wall bounce logic removed:
+                    // if (p.x <= p.size || p.x >= this.canvas.width - p.size) { p.directionX = -p.directionX; }
+                    // if (p.y <= p.size || p.y >= this.canvas.height - p.size) { p.directionY = -p.directionY; }
                 }
             }
             
             animate() {
                 requestAnimationFrame(() => this.animate());
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                // Assuming var(--navy) is rgb(0, 26, 51) - the actual color is #001a33
+                this.ctx.fillStyle = 'rgba(0, 26, 51, 0.12)'; // Slightly longer trails
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
                 
                 this.updateParticles();
                 
@@ -452,6 +631,7 @@
                 this.currentSlide = 0;
                 this.slideCount = this.slides.length;
                 this.autoSlideInterval = null;
+                this.slideChangeDuration = 500; // Added property
                 
                 // Initialize slider
                 this.init();
@@ -479,16 +659,37 @@
             }
             
             showSlide(index) {
-                // Update current slide
-                this.currentSlide = index;
-                
-                // Update container position
-                this.container.style.transform = `translateX(-${this.currentSlide * 100}%)`;
-                
-                // Update active dot
-                this.dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === this.currentSlide);
+                const outgoingSlideIndex = this.currentSlide;
+                const outgoingSlide = this.slides[outgoingSlideIndex];
+
+                // If there's an outgoing slide and it's different from the new index
+                if (outgoingSlide && outgoingSlideIndex !== index) {
+                    outgoingSlide.classList.add('slide-is-leaving');
+                }
+
+                // Remove active and leaving classes from all slides
+                this.slides.forEach(slide => {
+                    slide.classList.remove('slide-is-active');
+                    // Keep slide-is-leaving until the new slide is ready to be shown
                 });
+
+                // Delay transform and active class addition
+                setTimeout(() => {
+                    this.container.style.transform = `translateX(-${index * 100}%)`;
+                    
+                    // Remove leaving class after transition could have played
+                    if (outgoingSlide && outgoingSlideIndex !== index) {
+                         outgoingSlide.classList.remove('slide-is-leaving');
+                    }
+
+                    this.slides[index].classList.add('slide-is-active');
+                    this.currentSlide = index;
+
+                    // Update active dot
+                    this.dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === this.currentSlide);
+                    });
+                }, this.slideChangeDuration / 2); // Delay slightly less than full duration for overlap
             }
             
             nextSlide() {
@@ -513,6 +714,30 @@
         }
 
         // ==============================================
+        // BLOG CARD ENTRANCE ANIMATION
+        // ==============================================
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        const cardObserverOptions = {
+            root: null, // relative to document viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of card visible
+        };
+
+        const cardObserver = new IntersectionObserver((entries, observerInstance) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerInstance.unobserve(entry.target); // Unobserve after animation
+                }
+            });
+        }, cardObserverOptions);
+
+        blogCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+
+        // ==============================================
         // REST OF THE SCRIPT FOR PORTFOLIO FUNCTIONALITY
         // ==============================================
         
@@ -535,9 +760,17 @@
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
+        const menuIcon = menuToggle.querySelector('i');
         
         menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.toggle('active');
+            if (isActive) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
         });
 
         // Smooth scrolling for navigation links
