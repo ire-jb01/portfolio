@@ -407,8 +407,15 @@
                 this.canvas = document.getElementById(canvasId);
                 this.ctx = this.canvas.getContext('2d');
                 this.particles = [];
-                this.mouse = { x: null, y: null, radius: 100 };
-                this.particleCount = 100;
+                this.mouse = {
+                    x: null, y: null,
+                    magneticRadius: 280, // Slightly increased interaction range
+                    repulsionRadius: 70,  // Slightly reduced for a smaller "personal space"
+                    attractionForce: 0.04, // Slightly reduced
+                    repulsionForce: 0.20,  // Slightly increased
+                    lightRadius: 220 // Slightly increased light influence
+                };
+                this.particleCount = 70; // Reduced for performance with trails
                 
                 // Initialize animation
                 this.initCanvas();
@@ -441,30 +448,54 @@
                     const directionX = (Math.random() - 0.5) * 2;
                     const directionY = (Math.random() - 0.5) * 2;
                     
-                    // Create gradient colors
-                    const color1 = `rgba(0, 102, 255, ${Math.random() * 0.6 + 0.4})`;
-                    const color2 = `rgba(0, 204, 255, ${Math.random() * 0.6 + 0.4})`;
-                    
+                    const baseAlpha = Math.random() * 0.2 + 0.1; // Reduced base alpha (0.1 to 0.3)
+                    const shapeType = Math.random() < 0.7 ? 'circle' : 'square';
+                    let particleSize = Math.random() * 4 + 1; // Reduced max size slightly
+
                     this.particles.push({
-                        x, y, size,
+                        x, y,
+                        size: particleSize, // Main dimension
+                        shapeType: shapeType,
                         directionX, directionY,
-                        color1, color2
+                        baseColor1RGB: [0, 102, 255],
+                        baseColor2RGB: [0, 204, 255],
+                        baseAlpha: baseAlpha,
+                        currentAlpha: baseAlpha,
+                        vx: 0,
+                        vy: 0
                     });
                 }
             }
             
             drawParticle(particle) {
-                // Create gradient
+                const color1String = `rgba(${particle.baseColor1RGB[0]}, ${particle.baseColor1RGB[1]}, ${particle.baseColor1RGB[2]}, ${particle.currentAlpha})`;
+                const color2String = `rgba(${particle.baseColor2RGB[0]}, ${particle.baseColor2RGB[1]}, ${particle.baseColor2RGB[2]}, ${particle.currentAlpha * 0.7})`;
+
                 const gradient = this.ctx.createRadialGradient(
                     particle.x, particle.y, 0,
-                    particle.x, particle.y, particle.size
+                    particle.x, particle.y, particle.size * 1.5
                 );
-                gradient.addColorStop(0, particle.color1);
-                gradient.addColorStop(1, particle.color2);
+                gradient.addColorStop(0, color1String);
+                gradient.addColorStop(1, color2String);
                 
-                this.ctx.beginPath();
-                this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                 this.ctx.fillStyle = gradient;
+
+                // Dynamic sizing based on speed
+                const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+                let dynamicSizeFactor = 1 - (speed / 15); // Particles need to move faster to shrink
+                dynamicSizeFactor = Math.max(0.2, Math.min(1.2, dynamicSizeFactor)); // Min size 20%, max 120%
+
+                const drawSize = particle.size * dynamicSizeFactor;
+
+                this.ctx.beginPath();
+
+                if (particle.shapeType === 'circle') {
+                    this.ctx.arc(particle.x, particle.y, drawSize, 0, Math.PI * 2);
+                } else if (particle.shapeType === 'square') {
+                    // Non-rotated square:
+                    this.ctx.rect(particle.x - drawSize / 2, particle.y - drawSize / 2, drawSize, drawSize);
+                }
+
                 this.ctx.fill();
             }
             
@@ -500,33 +531,82 @@
                     if (p.x <= p.size || p.x >= this.canvas.width - p.size) {
                         p.directionX = -p.directionX;
                     }
-                    if (p.y <= p.size || p.y >= this.canvas.height - p.size) {
-                        p.directionY = -p.directionY;
-                    }
-                    
+                    // Update particle position based on its own velocity (incorporates inherent direction and mouse effects)
+                    p.vx += p.directionX * 0.02; // Reduced influence of autonomous drift
+                    p.vy += p.directionY * 0.02; // Reduced influence of autonomous drift
+
                     // Mouse interaction
                     if (this.mouse.x && this.mouse.y) {
                         const dx = p.x - this.mouse.x;
                         const dy = p.y - this.mouse.y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < this.mouse.radius) {
-                            // Repel particles from mouse
-                            const force = (this.mouse.radius - distance) / this.mouse.radius;
-                            const angle = Math.atan2(dy, dx);
-                            const moveX = Math.cos(angle) * force * 5;
-                            const moveY = Math.sin(angle) * force * 5;
-                            
-                            p.x += moveX;
-                            p.y += moveY;
+                        const angle = Math.atan2(dy, dx);
+
+                        let forceMagnitude = 0;
+                        let forceDirection = 0; // 1 for repel, -1 for attract
+
+                        if (distance < this.mouse.repulsionRadius) {
+                            // Repulsion zone
+                            forceMagnitude = (this.mouse.repulsionRadius - distance) / this.mouse.repulsionRadius;
+                            forceDirection = 1;
+                            forceMagnitude *= this.mouse.repulsionForce; // Apply repulsion strength
+                        } else if (distance < this.mouse.magneticRadius) {
+                            // Attraction zone
+                            forceMagnitude = (this.mouse.magneticRadius - distance) / this.mouse.magneticRadius;
+                            forceDirection = -1;
+                            forceMagnitude *= this.mouse.attractionForce; // Apply attraction strength
                         }
+
+                        if (forceMagnitude > 0) {
+                            const accelX = Math.cos(angle) * forceMagnitude * forceDirection;
+                            const accelY = Math.sin(angle) * forceMagnitude * forceDirection;
+                            
+                            p.vx += accelX;
+                            p.vy += accelY;
+                        }
+
+                        if (distance < this.mouse.lightRadius) {
+                            const lightIntensity = 1 - (distance / this.mouse.lightRadius); // 0 to 1
+                            p.currentAlpha = p.baseAlpha + (1 - p.baseAlpha) * lightIntensity;
+                            p.currentAlpha = Math.min(1, Math.max(0, p.currentAlpha)); // Clamp between 0 and 1
+                        } else {
+                            // Gradually revert to baseAlpha
+                            p.currentAlpha += (p.baseAlpha - p.currentAlpha) * 0.05; // Smooth revert
+                        }
+                    } else {
+                        // No mouse, gradually revert to baseAlpha
+                         p.currentAlpha += (p.baseAlpha - p.currentAlpha) * 0.05; // Smooth revert
                     }
+
+                    // Apply damping/friction
+                    const dampingFactor = 0.94; // Slightly less damping
+                    p.vx *= dampingFactor;
+                    p.vy *= dampingFactor;
+
+                    // Update position with velocity
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Bounce off walls (using p.x, p.y and new p.vx, p.vy)
+                    if (p.x - p.size <= 0 || p.x + p.size >= this.canvas.width) {
+                        p.vx *= -1; // Reverse velocity component
+                        p.x = Math.max(p.size, Math.min(p.x, this.canvas.width - p.size)); // Clamp position
+                    }
+                    if (p.y - p.size <= 0 || p.y + p.size >= this.canvas.height) {
+                        p.vy *= -1; // Reverse velocity component
+                        p.y = Math.max(p.size, Math.min(p.y, this.canvas.height - p.size)); // Clamp position
+                    }
+                    // Old wall bounce logic removed:
+                    // if (p.x <= p.size || p.x >= this.canvas.width - p.size) { p.directionX = -p.directionX; }
+                    // if (p.y <= p.size || p.y >= this.canvas.height - p.size) { p.directionY = -p.directionY; }
                 }
             }
             
             animate() {
                 requestAnimationFrame(() => this.animate());
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                // Assuming var(--navy) is rgb(0, 26, 51) - the actual color is #001a33
+                this.ctx.fillStyle = 'rgba(0, 26, 51, 0.12)'; // Slightly longer trails
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
                 
                 this.updateParticles();
                 

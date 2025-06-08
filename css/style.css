@@ -139,19 +139,18 @@ header.scrolled {
     display: flex;
     align-items: center;
     padding: 128px 0 96px; /* Adjusted padding */
-    position: relative;
-    overflow: hidden;
+    background-color: var(--navy); /* Set a solid dark background */
+    position: relative; /* Ensure stacking context */
+    overflow: hidden; /* Already there, good */
 }
 
 .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 204, 255, 0.1) 0%, rgba(0, 102, 255, 0.05) 70%, transparent 100%);
-    z-index: -1;
+    /* This light radial gradient might conflict with dark trails.
+       Consider removing it or ensuring it's behind the canvas if trails are dark.
+       For now, let's comment it out or ensure its z-index is lower than canvas.
+       If we set hero background to navy, this ::before might not be needed or desired.
+    */
+    display: none; /* Simplest way to hide it for now to ensure dark bg */
 }
 
 #particle-canvas {
@@ -160,14 +159,14 @@ header.scrolled {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 1; /* Above hero background, below content */
 }
 
 .hero-content {
     max-width: 650px;
     animation: fadeUp 1s ease-out;
-    position: relative;
-    z-index: 2;
+    position: relative; /* Ensure it has its own stacking context if not already */
+    z-index: 2; /* Above canvas */
 }
 
 .hero h1 {
