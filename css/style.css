@@ -924,6 +924,7 @@ textarea.form-control {
 
 /* Footer */
 footer {
+    margin-top: 50px;
     background: var(--navy);
     color: var(--light-text);
     padding: 64px 0 32px; /* Adjusted padding */
