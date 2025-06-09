@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Frameworks: A Comparative Overview | John Borel</title>
+    <meta name="description" content="An overview and comparison of popular JavaScript frameworks like React, Vue, and Angular.">
+    <meta name="keywords" content="JavaScript, JS Frameworks, React, Vue, Angular, Frontend Development, John Borel">
+    <meta name="author" content="John Borel">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo"><i class="fas fa-bolt"></i>John Borel</a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#services">Services</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#blog">Blog</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Article Content -->
+    <main class="article-page">
+        <div class="article-full-content">
+            <section class="article-content container">
+                <h1>JavaScript Frameworks: A Comparative Overview</h1>
+                <p class="article-meta">October 22, 2023 | 7 min read</p>
+                <img src="../framework.png" alt="JavaScript Frameworks Overview" />
+                <article>
+                    <p>The world of JavaScript frameworks is vast and ever-evolving. Choosing the right framework can significantly impact project timelines, performance, and scalability. This article provides a comparative overview of some of the most popular JavaScript frameworks today, including React, Vue, and Angular.</p>
+                    <p>We will delve into their core philosophies, architectural patterns, performance characteristics, ecosystem, and community support. Understanding these aspects will help developers and teams make informed decisions when selecting a framework for their next project. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </article>
+
+                <div class="article-tags">
+                    <span>JavaScript</span>
+                    <span>React</span>
+                    <span>Vue</span>
+                    <span>Angular</span>
+                </div>
+                <a href="../index.html#blog" class="back-to-blog-link">← Back to Blog</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>John Borel</h3>
+                    <p>A passionate web developer and designer dedicated to creating beautiful, functional websites that help businesses succeed in the digital world.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/john-borel-9750a5328/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Home</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#projects">Projects</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../index.html#services">Web Development</a></li>
+                        <li><a href="../index.html#services">UI/UX Design</a></li>
+                        <li><a href="../index.html#services">Mobile Development</a></li>
+                        <li><a href="../index.html#services">SEO Optimization</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 John Borel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle for article pages
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', function() {
+            const isActive = navLinks.classList.toggle('active');
+            if (isActive) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth scrolling for navigation links within the article page (if any)
+        // or for links back to the main page sections.
+        document.querySelectorAll('header a[href^="../index.html#"], footer a[href^="../index.html#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.classList.remove('active'); // Close mobile menu if open
+
+                const targetUrl = this.getAttribute('href');
+                window.location.href = targetUrl;
+            });
+        });
+    </script>
+</body>
+</html>
