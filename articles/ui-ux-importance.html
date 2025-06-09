@@ -41,7 +41,7 @@
                     <p>In today's competitive digital landscape, a visually appealing website is not enough. User Interface (UI) and User Experience (UX) design play a pivotal role in determining the success of a web project. This article delves into why UI/UX are critical components of web development.</p>
                     <p>We'll explore how effective UI design contributes to brand identity and usability, while thoughtful UX design ensures that users have a seamless, intuitive, and enjoyable interaction with the website. From reducing bounce rates to increasing conversions, the impact of good UI/UX cannot be overstated. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </article>
-                
+
                 <div class="article-tags">
                     <span>UI/UX</span>
                     <span>Design</span>
@@ -98,7 +98,7 @@
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         const menuIcon = menuToggle.querySelector('i');
-        
+
         menuToggle.addEventListener('click', function() {
             const isActive = navLinks.classList.toggle('active');
             if (isActive) {
@@ -116,7 +116,7 @@
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 navLinks.classList.remove('active'); // Close mobile menu if open
-                
+
                 const targetUrl = this.getAttribute('href');
                 window.location.href = targetUrl;
             });

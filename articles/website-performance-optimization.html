@@ -41,7 +41,7 @@
                     <p>Website performance is a critical factor for user satisfaction, search engine rankings, and overall online success. Slow-loading websites lead to high bounce rates and poor user engagement. This article outlines key strategies for optimizing website performance.</p>
                     <p>We will cover topics such as image optimization, code minification, browser caching, content delivery networks (CDNs), and server-side optimizations. Implementing these techniques can significantly improve your website's speed, responsiveness, and Core Web Vitals scores. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </article>
-                
+
                 <div class="article-tags">
                     <span>Performance</span>
                     <span>Optimization</span>
@@ -98,7 +98,7 @@
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         const menuIcon = menuToggle.querySelector('i');
-        
+
         menuToggle.addEventListener('click', function() {
             const isActive = navLinks.classList.toggle('active');
             if (isActive) {
@@ -116,7 +116,7 @@
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 navLinks.classList.remove('active'); // Close mobile menu if open
-                
+
                 const targetUrl = this.getAttribute('href');
                 window.location.href = targetUrl;
             });
