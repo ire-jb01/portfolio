@@ -1533,3 +1533,9 @@ footer {
         font-size: 0.8rem;
     }
 }
+
+/* Blog Listing Page Specific Adjustments */
+#blog-listing-page .section-header {
+    padding-top: 120px; /* Space for fixed header */
+    margin-bottom: 48px; /* Consistent margin with other section headers */
+}
